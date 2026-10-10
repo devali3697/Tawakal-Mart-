@@ -1,0 +1,2 @@
+import {body,db,fail,json,limit} from '../../../lib/server';import {phone} from '../../../lib/commerce';
+export async function POST(req:Request){try{await limit(req,'track',8);const b=await body(req);const p=phone(String(b.phone||''));const row=await db().prepare('SELECT number,status,total,created_at,courier,tracking FROM orders WHERE number=? AND phone=?').bind(String(b.number||'').trim().toUpperCase(),p).first();if(!row)return json({error:'No matching order found. Check the order number and mobile number.'},404);return json(row);}catch(e){return fail(e);}}

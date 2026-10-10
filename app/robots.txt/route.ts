@@ -1,0 +1,2 @@
+import {getData} from '../../lib/server';
+export async function GET(req:Request){let preview=true;try{preview=(await getData()).settings.mode==='preview'}catch{}return new Response(preview?'User-agent: *\nDisallow: /\n':'User-agent: *\nDisallow: /admin\nDisallow: /api/\nDisallow: /cart\nDisallow: /checkout\nSitemap: '+new URL(req.url).origin+'/sitemap.xml\n',{headers:{'Content-Type':'text/plain'}})}

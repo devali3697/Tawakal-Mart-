@@ -1,0 +1,1 @@
+export default function NotFound(){return <main className="empty"><span className="eyebrow">404 / A LITTLE DETOUR</span><h1 style={{marginTop:25}}>This page wandered off.</h1><p>Let’s find you something lovely instead.</p><a className="button dark" href="/shop">Explore the collection →</a></main>}

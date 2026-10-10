@@ -1,0 +1,15 @@
+export type Variant={id:string;sku:string;size:string;color:string;price:number;stock:number;image?:string};
+export type Product={salesCount?:number;id:string;slug:string;name:string;category:string;brand:string;collection:string;description:string;images:string[];price:number;comparePrice:number;status:'published'|'draft'|'archived';featured:boolean;bestseller:boolean;sample:boolean;createdAt:string;seoTitle:string;seoDescription:string;specifications:string;sizeGuide:string;variants:Variant[]};
+export type Category={id:string;name:string;slug:string;parent:string;image:string;visible:boolean;order:number};
+export type Coupon={id:string;code:string;type:'percent'|'fixed';value:number;minimum:number;limit:number;used:number;expires:string;starts:string;categories:string[];products:string[];active:boolean};
+export type Campaign={id:string;title:string;subtitle:string;image:string;mobileImage:string;link:string;label:string;visible:boolean;order:number};
+export type Shipping={id:string;name:string;province:string;city:string;fee:number;freeAbove:number;estimate:string};
+export type Page={id:string;title:string;content:string};
+export type Settings={name:string;tagline:string;announcement:string;announcementLink:string;logo:string;favicon:string;email:string;phone:string;whatsapp:string;address:string;instagram:string;facebook:string;seoTitle:string;seoDescription:string;mode:'preview'|'live';sections:string[];newsletter:boolean;reviews:boolean;saleEnds:string;notificationEmail:string;notifications:boolean;footerText:string;navigation:{label:string;href:string}[];footerLinks:{label:string;href:string}[]};
+export type Data={products:Product[];categories:Category[];coupons:Coupon[];campaigns:Campaign[];shipping:Shipping[];pages:Page[];settings:Settings;brands:{id:string;name:string}[];collections:{id:string;name:string;image:string;description:string}[]};
+export type CartLine={variantId:string;quantity:number};
+export type Customer={name:string;phone:string;email:string;province:string;city:string;address:string;landmark:string;notes:string};
+export type Order={id:string;number:string;status:string;customer:Customer;items:{name:string;sku:string;size:string;color:string;image:string;quantity:number;price:number;variantId:string}[];subtotal:number;discount:number;shipping:number;total:number;createdAt:string;sample:boolean;courier:string;tracking:string;notes:string;collected:boolean;released:boolean};
+export const money=(v:number)=>'Rs. '+Math.round(v).toLocaleString('en-PK');
+export const provinces=['Punjab','Sindh','Khyber Pakhtunkhwa','Balochistan','Islamabad Capital Territory','Azad Kashmir','Gilgit-Baltistan'];
+export const statuses=['Pending','Confirmed','Packed','Shipped','Delivered','Cancelled','Returned'];

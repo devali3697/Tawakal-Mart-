@@ -1,0 +1,3 @@
+import {getData,json,fail,body,db,limit} from '../../../lib/server';
+export async function GET(){try{const d=await getData();return json({...d,products:d.products.filter(p=>p.status==='published'&&(d.settings.mode==='preview'||!p.sample)),coupons:[],settings:{...d.settings,notificationEmail:''}});}catch(e){return fail(e,503);}}
+export async function POST(req:Request){try{await limit(req,'newsletter',5);const b=await body(req);if(typeof b.email!=='string'||! /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(b.email)||b.email.length>254)throw new Error('Enter a valid email address.');await db().prepare('INSERT OR IGNORE INTO subscribers(email,created_at) VALUES(?,?)').bind(b.email.toLowerCase(),new Date().toISOString()).run();return json({ok:true});}catch(e){return fail(e);}}
